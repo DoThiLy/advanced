@@ -49,14 +49,14 @@ class Branch extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'code' => 'Code',
-            'name' => 'Name',
-            'address' => 'Address',
-            'status' => 'Status',
-            'note' => 'Note',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            // 'id' => 'ID',
+            'code' => 'Mã',
+            'name' => 'Tên chi nhánh',
+            'address' => 'Địa chỉ',
+            'status' => 'Trạng thái',
+            'note' => 'Ghi chú',
+            'created_at' => 'Thời gian tạo',
+            'updated_at' => 'Thời gian sửa',
         ];
     }
 

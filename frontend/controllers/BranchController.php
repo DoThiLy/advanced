@@ -6,6 +6,9 @@ use app\models\BranchSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
+use yii\data\ActiveDataProvider;
+
 
 /**
  * BranchController implements the CRUD actions for Branch model.
@@ -15,6 +18,38 @@ class BranchController extends Controller
     /**
      * @inheritDoc
      */
+    public function actionShow()
+    {
+        $searchModel = new Branch();
+        
+        $query = Branch::find();
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort'=> [
+                'defaultOrder' => 
+                [
+                    'username' => SORT_ASC,
+                    'created_at' => SORT_DESC,
+                ]
+            ],
+            'pagination' => [
+                'pageSize' => 1,
+             ],
+        ]);
+
+        $searchModel->load(Yii::$app->request->get()); // lấy ra tất cả các giá trị được nhập trên gridview để lọc dữ liệu
+
+        $query->andFilterWhere(['like', 'username', $searchModel->username]);
+        
+
+        return $this->render('show', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function behaviors()
     {
         return array_merge(
